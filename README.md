@@ -1,8 +1,12 @@
-## 寻找如意 seek-for-ruyii
+## 寻找如意 seek-for-ruyi
 
 作为 openRuyi 打包方案和构建流程演进的实验/测试仓库
 
 ~~各种命名随机生成~~
+
+## 报告产出
+
+[reports](reports)
 
 ## 分支
 
