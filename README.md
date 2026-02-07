@@ -14,3 +14,6 @@
 - try-xxx: 测试 xxx 方案
 - others: as the name describes
 
+## Note
+
+This repository uses `jj` (Jujutsu) for version control.
