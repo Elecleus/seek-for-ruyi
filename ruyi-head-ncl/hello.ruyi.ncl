@@ -1,9 +1,6 @@
-let
-  { Package, .. } = import "lib/package.ncl",
-  { Autotool, .. } = import "lib/build-systems.ncl"
+let rec { makePackage, Package, .. } = import "lib/package.ncl",
 in
-Autotool
-& {
+makePackage {
   name = "hello",
   version = "2.12.2",
   license = "GPL-3.0-or-later",
@@ -13,4 +10,5 @@ Autotool
       GNU Hello is a program that prints "Hello, world!" when you run it.
       It is fully customizable.
     "%,
+  build-system = 'autotool,
 } | Package

@@ -1,16 +1,43 @@
 {
+  makePackage
+    : Package -> Package
+    | not_exported
+    = fun pkg => pkg,
+  BuildSystem = [| 'none, 'autotool |],
   BuildStep = {
     name | String,
     content | String,
+    index
+      | Number
+      | doc m%"
+          the priority of the build step
+          The little one runs earlier. 
+      "%,
   },
-  Package = {
-    name | String,
-    version | String,
-    summary | String,
-    description | String,
-    license | String,
-    url | String,
-    vcs | optional,
-    build-steps | optional,
-  }
+  PackageBasic
+    | doc "basic metadata needed to define a package"
+    = {
+      name | String,
+      version | String,
+      summary | String,
+      description | String,
+      license | String,
+      url | String,
+
+      # [TODO] At least one of build-system and build-steps
+      build-system
+        | optional
+        | BuildSystem,
+      build-steps
+        | optional
+        | Array BuildStep,
+    },
+  PackageRuyiExtra
+    | doc "extra metadata for openRuyi distro"
+    = {
+      vcs | optional,
+    },
+  Package
+    | doc "package definition for openRuyi"
+    = PackageBasic & PackageRuyiExtra
 }
