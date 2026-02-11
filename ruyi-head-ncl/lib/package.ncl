@@ -1,8 +1,8 @@
 {
   makePackage
-    : Package -> Package
+    | Package -> Package
     | not_exported
-    = fun pkg => pkg,
+    = fun pkg => let BuildSystems = import "build-systems.ncl" in pkg & { build-steps = BuildSystems."%{pkg.build-system}".build-steps },
   BuildSystem = [| 'none, 'autotool |],
   BuildStep = {
     name | String,
