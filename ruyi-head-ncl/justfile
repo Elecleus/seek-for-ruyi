@@ -1,4 +1,5 @@
 example-pkg := "hello"
+spec-example-pkg := "gcc"
 
 eval:
     @nickel eval {{example-pkg}}.ncl
@@ -8,3 +9,6 @@ json:
 
 yaml:
     @nickel export --format yaml {{example-pkg}}.ncl | tee export/yaml/{{example-pkg}}.ruyi.yaml  
+
+spec:
+    @nickel export --format text --field {{spec-example-pkg}}-spec {{spec-example-pkg}}.ncl | tee export/spec/{{spec-example-pkg}}.ruyi.spec  

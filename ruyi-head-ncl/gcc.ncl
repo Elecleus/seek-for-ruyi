@@ -1,4 +1,6 @@
-let rec { makePackage, Package, .. } = import "lib/package.ncl",
+let
+  { makePackage, Package, .. } = import "lib/package.ncl",
+  export-to-spec = (import "lib/templates/rpm-spec.ncl").from-package,
 in
 {
   gcc' =
@@ -21,5 +23,6 @@ in
           = false,
       }
     } | Package,
-  gcc = makePackage (gcc' & { name | force = "gcc15" })
+  gcc = makePackage (gcc' & { name | force = "gcc15" }),
+  gcc-spec = export-to-spec gcc,
 }
