@@ -1,6 +1,9 @@
 let { BuildStep, .. } = import "package.ncl"
 in
 {
+  none = {
+    build-steps = []
+  },
   autotool = {
     build-steps : Array BuildStep = [
       {

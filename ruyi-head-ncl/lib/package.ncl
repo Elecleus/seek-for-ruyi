@@ -31,6 +31,13 @@
       build-steps
         | optional
         | Array BuildStep,
+
+      options
+        | optional
+        | doc "A dict containing all options for the package",
+      extra
+        | optional
+        | doc "A dict containing extra data for various purposes"
     },
   PackageRuyiExtra
     | doc "extra metadata for openRuyi distro"
