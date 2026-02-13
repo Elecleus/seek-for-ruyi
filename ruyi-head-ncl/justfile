@@ -1,8 +1,10 @@
+example-pkg := "hello"
+
 eval:
-    @nickel eval ./hello.ruyi.ncl
+    @nickel eval {{example-pkg}}.ncl
 
 json:
-    @nickel export --format json ./hello.ruyi.ncl  
+    @nickel export --format json {{example-pkg}}.ncl | tee export/json/{{example-pkg}}.ruyi.json 
 
 yaml:
-    @nickel export --format yaml ./hello.ruyi.ncl  
+    @nickel export --format yaml {{example-pkg}}.ncl | tee export/yaml/{{example-pkg}}.ruyi.yaml  
