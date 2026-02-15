@@ -32,6 +32,9 @@
         | optional
         | Array BuildStep,
 
+      requires | Array String,
+      build-requires | Array String,
+
       options
         | optional
         | doc "A dict containing all options for the package",
