@@ -16,7 +16,14 @@ Version:        %%{p.version}
 Release:        %autorelease
 Summary:        %%{p.summary}
 License:        %%{p.license}
-Source0:                    [TODO]
+%%{
+  let f = fun i source => m%"
+Source%{i}:        %{source.url}
+    "% in
+  p.sources
+    |> std.array.map_with_index f
+    |> std.string.join "\n"
+}
 
 BuildRequires:              [TODO]
 

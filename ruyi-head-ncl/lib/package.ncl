@@ -14,6 +14,14 @@
           The little one runs earlier. 
       "%,
   },
+  Source
+    | doc "source definition"
+    | optional
+    = {
+      url | String,
+      checksum | String,
+      type | default = 'sha256
+    },
   PackageBasic
     | doc "basic metadata needed to define a package"
     = {
@@ -34,6 +42,8 @@
 
       requires | Array String,
       build-requires | Array String,
+
+      sources | Array Source,
 
       options
         | optional
