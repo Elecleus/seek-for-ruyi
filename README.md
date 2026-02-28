@@ -6,7 +6,8 @@
 
 ## 报告产出
 
-[reports](reports)
+- **月度总结**：[monthly](monthly)
+- **调研**：[reports](reports)
 
 ## 分支
 
