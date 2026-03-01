@@ -16,7 +16,6 @@
   },
   Source
     | doc "source definition"
-    | optional
     = {
       url | String,
       checksum | String,
@@ -40,10 +39,16 @@
         | optional
         | Array BuildStep,
 
-      requires | Array String,
-      build-requires | Array String,
+      requires
+        | optional
+        | Array String,
+      build-requires
+        | optional
+        | Array String,
 
-      sources | Array Source,
+      sources
+        | optional
+        | Array Source,
 
       options
         | optional
