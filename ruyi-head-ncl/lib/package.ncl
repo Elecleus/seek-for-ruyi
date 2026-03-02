@@ -18,11 +18,16 @@
     | doc "source definition"
     = {
       url | String,
-      checksum | String,
-      type | default = 'sha256
+      type | default = 'remote,
+      checksum
+        | String
+        | optional,
+      checksum-type
+        | default
+        = 'sha256
     },
-  PackageBasic
-    | doc "basic metadata needed to define a package"
+  Package
+    | doc "Metadata needed to define a package"
     = {
       name | String,
       version | String,
@@ -55,14 +60,13 @@
         | doc "A dict containing all options for the package",
       extra
         | optional
-        | doc "A dict containing extra data for various purposes"
+        | doc "A dict containing extra data for various purposes",
+
+      outputs
+        | optional
+        | doc "Sub-packages",
+      platform
+        | optional
+        | doc "Extra metadata for different platform"
     },
-  PackageRuyiExtra
-    | doc "extra metadata for openRuyi distro"
-    = {
-      vcs | optional,
-    },
-  Package
-    | doc "package definition for openRuyi"
-    = PackageBasic & PackageRuyiExtra
 }

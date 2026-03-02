@@ -32,25 +32,24 @@ Requires:                   [TODO]
 %description
 %%{p.description}
 
-%package     -n cpp
-Summary:        The system GNU Preprocessor
-License:        GPL-3.0-or-later
-Requires:       cpp% {gcc_version}
-# Only one of the symlink packages can be installed at the same time
-Provides:       cpp = % {version}-% {release}
-Conflicts:      cpp
-
-%description -n cpp
-The system GNU Preprocessor.
-
-%package     -n gcc-c++
-Summary:        The system GNU C++ Compiler
-License:        GPL-3.0-or-later
-Requires:       gcc% {gcc_version}-c++
-Requires:       gcc = % {version}
-
-%description -n gcc-c++
-The system GNU C++ Compiler.
+%%{
+  p.outputs
+    |> std.record.to_array
+    |> std.array.map
+        (fun { field = name, value = content} => 
+m%"
+%package        %{name}
+Summary:        %{content.summary}"% 
+++ (if std.record.has_field "build-requires" content then
+  content.build-requires |> std.string.join "\n"
+else
+  "") ++
+m%"\n\n
+%description    %{name}
+%{content.description}
+        "%)
+    |> std.string.join "\n\n"
+}
 
 %package     -n libstdc++-devel
 Summary:        The system GNU C++ development files
