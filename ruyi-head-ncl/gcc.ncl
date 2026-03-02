@@ -11,8 +11,8 @@ in
       url = "http://gcc.gnu.org/",
       summary = "The system GNU C Compiler",
       description = m%"
-      The system GNU C Compiler.
-    "%,
+        The system GNU C Compiler.
+      "%,
       sources = [
         {
           url = "test-url",
