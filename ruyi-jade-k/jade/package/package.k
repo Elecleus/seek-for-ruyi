@@ -13,7 +13,14 @@ schema Source:
     checksum?: str
     checksumType?: "sha256"
 
-type Platform = "openRuyi" # | "openJixiang"
+type Platform = "openRuyi" | "openJixiang"
+
+schema Output:
+    summary: str
+    description: str
+    runtimeRequires?: [str]
+    buildRequires?: [str]
+    files?: [str]
 
 schema Package:
     name: str
@@ -22,6 +29,7 @@ schema Package:
     description: str
     license: str
     url: str
+    outputs?: {str:Output}
     buildSystem?: BuildSystem
     buildSteps?: [BuildStep]
     runtimeRequires?: [str]
@@ -30,5 +38,4 @@ schema Package:
     options?: {str:any}
     extra?: {str:any}
     platform?: {Platform:any}
-
 
