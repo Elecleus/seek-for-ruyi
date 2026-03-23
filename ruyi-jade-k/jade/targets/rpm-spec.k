@@ -53,13 +53,13 @@ packageToRpmSpec = lambda p: package.Package -> str {
     if p.sources is not Undefined:
         _sources = "\n".join(["Source${i}:        ${v.url}" for i, v in p.sources])
 
-    if p.buildRequires is not Undefined:
-        _buildRequires = "\n".join(map b in p.buildRequires {
+    if p.outputs.main.buildRequires is not Undefined:
+        _buildRequires = "\n".join(map b in p.outputs.main.buildRequires {
             "BuildRequires:  ${b}"
         })
 
-    if p.runtimeRequires is not Undefined:
-        _runtimeRequires = "\n".join(map r in p.runtimeRequires {
+    if p.outputs.main.runtimeRequires is not Undefined:
+        _runtimeRequires = "\n".join(map r in p.outputs.main.runtimeRequires {
             "Requires:       ${r}"
         })
 
@@ -69,11 +69,11 @@ packageToRpmSpec = lambda p: package.Package -> str {
     """
 Name:           ${p.name}
 Version:        ${p.version}
-Summary:        ${p.summary}
+Summary:        ${p.outputs.main.summary}
 Release:        %autorelease
 License:        ${p.license}
 URL:            ${p.url}
-VCS:            ${p?.platform.openRuyi.vcs}
+VCS:            ${p?.extra.openRuyi.vcs}
 ${_sources}
 ${_buildSystem}
 
@@ -84,7 +84,7 @@ ${_buildSystem}
 ${_buildRequires}
 
 %description
-${p.description}
+${p.outputs.main.description}
 
 ${_packageSection}
 
