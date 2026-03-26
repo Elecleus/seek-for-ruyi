@@ -145,7 +145,7 @@ TODO
         }
     }
     outputs: [
-        default: {    <1>
+        main: {    <1>
             summary,
             buildRequires: [ string1, string2 ]
             requires: [ string1, string2 ]
@@ -168,7 +168,7 @@ TODO
 
 其中，
 
-- `<1>` 处 `default` 字段对应主包的定义
+- `<1>` 处 `main` 字段对应主包的定义
 - `<2>` 处对应各子包的定义
 - `<3>` 处 `options` 表作为参数，供包定义使用
 
@@ -200,7 +200,7 @@ TODO
         }
     }
     outputs: [
-        default: {    <1>
+        main: {    <1>
             summary,
             buildRequires: [ string1, string2 ]
             requires: [ string1, string2 ]

@@ -8,7 +8,7 @@ schema BuildStep:
     ----------
     script: bash 脚本
     env: bash 环境变量
-    
+
     Examples
     --------
     ```kcl
@@ -67,4 +67,3 @@ schema Package:
     options?: {str:any}
     # 额外附加信息，静态表填充模板阶段使用，存在于静态表。
     extra?: {str:any}
-
