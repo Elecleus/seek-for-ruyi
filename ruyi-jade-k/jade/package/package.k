@@ -61,8 +61,8 @@ schema Package:
     # `buildSystem` 是对构建系统的声明，用于进一步向 buildSteps 注入默认内容。
     buildSystem?: BuildSystem
     # 见 `schema BuildStep`
-    buildSteps?: {str:BuildStep}
-    sources?: [Source]
+    buildSteps?: [BuildStep]
+    sources?: {str:Source}
     # 额外附加信息，动态表转静态表阶段使用，不存在于静态表。
     options?: {str:any}
     # 额外附加信息，静态表填充模板阶段使用，存在于静态表。

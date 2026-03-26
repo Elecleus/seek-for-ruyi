@@ -30,6 +30,8 @@ BuildRequires:  {{ BuildRequires }}
 Requires:       {{ Requires }}
 Requires:       {{ Requires }}
 
+{{ BuildSteps }}
+
 %description
 {{ Description }}
 
@@ -144,7 +146,7 @@ TODO
             checksumType,
         }
     }
-    outputs: [
+    outputs: {
         main: {    <1>
             summary,
             buildRequires: [ string1, string2 ]
@@ -159,7 +161,7 @@ TODO
             description,
             files: [ string1 string2 ]
         }
-    ]
+    }
     options: {    <3>
         anyKey: anyValue
     }
@@ -199,7 +201,7 @@ TODO
             checksumType,
         }
     }
-    outputs: [
+    outputs: {
         main: {    <1>
             summary,
             buildRequires: [ string1, string2 ]
@@ -214,7 +216,7 @@ TODO
             description,
             files: [ string1 string2 ]
         }
-    ]
+    }
 }
 ```
 
