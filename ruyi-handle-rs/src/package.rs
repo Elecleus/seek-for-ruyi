@@ -5,41 +5,44 @@ use std::collections::HashMap;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PackageStatic {
-    name: String,
-    version: String,
-    release: String,
-    license: String,
-    url: String,
-    vcs: String,
+    pub name: String,
+    pub version: String,
+    pub release: String,
+    pub license: String,
+    pub url: String,
+    pub vcs: String,
     #[serde(alias = "buildSystem" /* For KCL */)]
-    build_system: String,
-    #[serde(alias = "build_steps" /* For KCL */)]
-    build_steps: Option<Vec<BuildStep>>,
-    sources: HashMap<String, Source>,
-    outputs: HashMap<String, Output>,
+    pub build_system: String,
+    #[serde(default, alias = "build_steps" /* For KCL */)]
+    pub build_steps: Vec<BuildStep>,
+    pub sources: HashMap<String, Source>,
+    pub outputs: HashMap<String, Output>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct BuildStep {
-    script: String,
-    environment: HashMap<String, String>,
+pub struct BuildStep {
+    pub script: String,
+    pub environment: HashMap<String, String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct Source {
+pub struct Source {
     #[serde(alias = "type" /* For KCL */)]
-    type_: String,
-    url: String,
-    checksum: String,
+    pub type_: String,
+    pub url: String,
+    pub checksum: String,
     #[serde(alias = "checksumType" /* For KCL */)]
-    checksum_type: String,
+    pub checksum_type: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct Output {
-    summary: String,
-    description: String,
-    requires: Option<Vec<String>>,
-    build_requires: Option<Vec<String>>,
-    files: Option<Vec<String>>,
+pub struct Output {
+    pub summary: String,
+    pub description: String,
+    #[serde(default)]
+    pub requires: Vec<String>,
+    #[serde(default)]
+    pub build_requires: Vec<String>,
+    #[serde(default)]
+    pub files: Vec<String>,
 }

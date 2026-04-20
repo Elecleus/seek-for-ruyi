@@ -44,7 +44,7 @@ BuildRequires:  {{ output.build_requires }}
 
 {% for build_step in build_steps %}
 %build -a
-
+{{ build_step.environment }}
 {{ build_step.script }}
 {% endfor %}
 
