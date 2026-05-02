@@ -2,5 +2,5 @@ run:
     kcl run graphviz.k
 
 test-export:
-    kcl run graphviz.k --format json | jq .graphviz > ../ruyi-handle-rs/package.json
+    kcl run graphviz.k --format json | jq .graphviz > ../temp/graphviz.json
    

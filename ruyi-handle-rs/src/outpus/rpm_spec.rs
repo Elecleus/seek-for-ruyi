@@ -6,7 +6,7 @@ use crate::package::{BuildStep, PackageStatic, Source};
 // 此部分字段直接对应模板填充
 #[derive(Template, Default)]
 #[template(path = "rpm-template.spec", escape = "none")]
-struct RpmSpecTemplate {
+pub struct RpmSpecTemplate {
     name: String,
     version: String,
     release: String,
@@ -138,7 +138,8 @@ impl TryFrom<&PackageStatic> for (OutputTemplate, Vec<OutputTemplate>) {
     }
 }
 
-enum IntoRpmSpecTemplateError {
+#[derive(Debug)]
+pub enum IntoRpmSpecTemplateError {
     MainOutputNotExist,
     FilesNotExist,
 }
