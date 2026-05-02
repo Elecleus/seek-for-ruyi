@@ -3,39 +3,46 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-#[derive(Serialize, Deserialize)]
-struct PackageStatic {
-    name: String,
-    version: String,
-    release: String,
-    license: String,
-    url: String,
-    vcs: String,
-    build_system: String,
-    build_steps: Vec<BuildStep>,
-    sources: HashMap<String, Source>,
-    outputs: HashMap<String, Output>,
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PackageStatic {
+    pub name: String,
+    pub version: String,
+    pub release: String,
+    pub license: String,
+    pub url: String,
+    pub vcs: String,
+    #[serde(alias = "buildSystem" /* For KCL */)]
+    pub build_system: String,
+    #[serde(default, alias = "build_steps" /* For KCL */)]
+    pub build_steps: Vec<BuildStep>,
+    pub sources: HashMap<String, Source>,
+    pub outputs: HashMap<String, Output>,
 }
 
-#[derive(Serialize, Deserialize)]
-struct BuildStep {
-    script: String,
-    environment: HashMap<String, String>,
+#[derive(Debug, Serialize, Deserialize)]
+pub struct BuildStep {
+    pub script: String,
+    pub environment: HashMap<String, String>,
 }
 
-#[derive(Serialize, Deserialize)]
-struct Source {
-    type_: String,
-    url: String,
-    checksum: String,
-    checksum_type: String,
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Source {
+    #[serde(alias = "type" /* For KCL */)]
+    pub type_: String,
+    pub url: String,
+    pub checksum: String,
+    #[serde(alias = "checksumType" /* For KCL */)]
+    pub checksum_type: String,
 }
 
-#[derive(Serialize, Deserialize)]
-struct Output {
-    summary: String,
-    description: String,
-    requires: String,
-    build_requires: String,
-    files: String,
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Output {
+    pub summary: String,
+    pub description: String,
+    #[serde(default)]
+    pub requires: Vec<String>,
+    #[serde(default)]
+    pub build_requires: Vec<String>,
+    #[serde(default)]
+    pub files: Vec<String>,
 }

@@ -27,6 +27,7 @@ schema BuildStep:
     env: {str:str}
 
 type SourceType = "Remote" | "Local" | "Patch"
+type ChecksumType = "sha256"
 
 schema Source:
     """
@@ -41,8 +42,8 @@ schema Source:
     """
     type: SourceType
     url: str
-    checksum?: str
-    checksumType?: "sha256"
+    checksum: str
+    checksumType?: ChecksumType = "sha256"
 
 schema Output:
     summary: str
@@ -54,6 +55,8 @@ schema Output:
 schema Package:
     name: str
     version: str
+    release: str
+    vcs: str
     license: str
     url: str
     # `output` 是一个键为任意字符串的表，其中 `main` 键必须，作为主包的对应部分。

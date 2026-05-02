@@ -9,6 +9,10 @@
 - **月度总结**：[monthly](monthly)
 - **调研**：[reports](reports)
 
+## 使用方式
+
+See [Usage](USAGE.md)
+
 ## 分支
 
 - main: monorepo, 当前主方案
