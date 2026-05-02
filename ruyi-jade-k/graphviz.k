@@ -30,6 +30,7 @@ graphviz = package.Package {
                 "pkgconfig(zlib)"
                 "pkgconfig(cairo) >= 1.1.10"
             ]
+            files: ["a", "b"]
         }
         devel: {
             summary: "Development package for graphviz"

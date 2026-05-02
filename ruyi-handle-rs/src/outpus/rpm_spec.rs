@@ -46,6 +46,12 @@ struct OutputTemplate {
     files: String,
 }
 
+impl PackageStatic {
+    pub fn to_rpm_spec_template(&self) -> Result<RpmSpecTemplate, IntoRpmSpecTemplateError> {
+        return self.try_into();
+    }
+}
+
 impl TryFrom<&PackageStatic> for RpmSpecTemplate {
     type Error = IntoRpmSpecTemplateError;
 
