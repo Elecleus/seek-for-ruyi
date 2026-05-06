@@ -1,7 +1,7 @@
 //! The standard static definition of a package.
 
+use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PackageStatic {
@@ -15,14 +15,14 @@ pub struct PackageStatic {
     pub build_system: String,
     #[serde(default, alias = "build_steps" /* For KCL */)]
     pub build_steps: Vec<BuildStep>,
-    pub sources: HashMap<String, Source>,
-    pub outputs: HashMap<String, Output>,
+    pub sources: IndexMap<String, Source>,
+    pub outputs: IndexMap<String, Output>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct BuildStep {
     pub script: String,
-    pub environment: HashMap<String, String>,
+    pub environment: IndexMap<String, String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
