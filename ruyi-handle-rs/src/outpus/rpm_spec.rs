@@ -1,7 +1,6 @@
 use askama::Template;
-use std::{collections::HashMap, fmt::Display};
 
-use crate::package::{BuildStep, PackageStatic, Source};
+use crate::package::{BuildStep, PackageStatic};
 
 // 此部分字段直接对应模板填充
 #[derive(Template, Default)]
