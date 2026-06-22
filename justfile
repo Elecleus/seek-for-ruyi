@@ -1,7 +1,4 @@
-default: test-jade test-handle
+default: handle
 
-test-jade:
-    cd ./ruyi-jade-k && just test-export
-
-test-handle:
+handle:
     cd ./ruyi-handle-rs && just

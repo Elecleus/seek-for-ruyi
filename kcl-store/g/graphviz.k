@@ -1,5 +1,4 @@
 import jade.package
-# import jade.targets
 
 package.Package {
     name: "graphviz"
@@ -43,5 +42,3 @@ package.Package {
         }
     }
 }
-
-# graphvizSpec = targets.packageToRpmSpec(graphviz)
