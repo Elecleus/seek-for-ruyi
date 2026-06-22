@@ -1,9 +1,8 @@
-use crate::input::InputError;
+use std::{fs::File, path::Path};
+
 use serde_json::from_reader;
 
-use crate::package::PackageStatic;
-
-use std::{fs::File, path::Path};
+use crate::{input::InputError, package::PackageStatic};
 
 pub fn from_json_file(path: &Path) -> Result<PackageStatic, InputError> {
     let file = File::open(path)?;
