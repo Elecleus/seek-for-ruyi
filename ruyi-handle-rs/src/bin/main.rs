@@ -1,8 +1,9 @@
-use std::path::Path;
-
 use askama::Template as _;
 use clap::{Arg, Command, arg};
-use ruyi_handle::{input, package::PackageStatic};
+use ruyi_handle::{
+    input::{self, input_router},
+    package::PackageStatic,
+};
 
 fn main() -> Result<(), input::InputError> {
     let matches = Command::new("ruyi")
@@ -32,31 +33,22 @@ fn main() -> Result<(), input::InputError> {
 
     match matches.subcommand() {
         Some(("import", import_matches)) => {
-            let path = Path::new(
-                import_matches
-                    .get_one::<String>("FILE")
-                    .expect("This should never panic."),
-            );
-            let ext = path.extension().and_then(|ext| ext.to_str()).unwrap_or("");
+            let target = import_matches
+                .get_one::<String>("FILE")
+                .expect("This should never panic.");
 
             // Load the file, according to the file format.
-            let loaded: PackageStatic = match ext {
-                "k" => input::from_kcl_file(path)?,
-                "json" => input::from_json_file(path)?,
-                _ => {
-                    panic!("[Error] Failed to infer FILE type.")
-                }
-            };
+            let loaded: PackageStatic = input_router(target);
 
             println!("{}", serde_json::to_string_pretty(&loaded)?)
         }
         Some(("export", export_matches)) => {
-            let loaded: PackageStatic =
-                if let Some(file_path) = export_matches.get_one::<String>("FILE") {
-                    input::from_json_file(Path::new(file_path))?
-                } else {
-                    input::from_stdin()?
-                };
+            let target = export_matches.get_one::<String>("FILE");
+
+            let loaded: PackageStatic = match target {
+                Some(s) => input_router(s),
+                None => input::from_stdin()?,
+            };
 
             let rpm_spec = loaded.to_rpm_spec_template().unwrap().render().unwrap(); // All these unwrap should never panic.
             println!("{}", rpm_spec);
