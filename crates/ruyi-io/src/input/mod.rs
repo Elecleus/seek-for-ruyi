@@ -8,7 +8,7 @@ pub use targets::json::from_json_file;
 pub use targets::kcl::from_kcl_file;
 pub use targets::stdin::from_stdin;
 
-use crate::repo::kcl::KclRepo;
+use crate::repo::{kcl::KclRepo, rpm_spec::RpmSpecRepo};
 
 pub fn input_router(target: &str) -> PackageStatic {
     match InputType::paste(target) {
@@ -46,9 +46,16 @@ impl InputType {
         }
 
         // Check for Name.
-        if let Some(target_path) = KclRepo::new().unwrap().get_by_name(target) {
-            return InputType::Name(target_path);
-        };
+        if let Ok(repo) = KclRepo::new() {
+            if let Some(target_path) = repo.get_by_name(target) {
+                return InputType::Name(target_path);
+            }
+        } // [TODO] else log: not found in kcl store.
+        if let Ok(repo) = RpmSpecRepo::new() {
+            if let Some(target_path) = repo.get_by_name(target) {
+                return InputType::Name(target_path);
+            }
+        } // [TODO] else log: not found in kcl store.
 
         // Stdin
         eprintln!("[INFO] Fallback to read from stdin.");
